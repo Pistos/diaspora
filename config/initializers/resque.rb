@@ -7,7 +7,8 @@ if !AppConfig.single_process_mode?
     uri = URI.parse(redis_to_go)
     Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   elsif AppConfig[:redis_url]
-    Resque.redis = Redis.new(:host => AppConfig[:redis_url], :port => 6379)
+    uri = URI.parse(AppConfig[:redis_url])
+    Resque.redis = Redis.new(:host => uri.host || AppConfig[:redis_url], :port => uri.port || 6379)
   end
 end
 
@@ -17,7 +18,7 @@ if AppConfig.single_process_mode?
   end
   module Resque
     def enqueue(klass, *args)
-      begin 
+      begin
         klass.send(:perform, *args)
       rescue Exception => e
         Rails.logger.warn(e.message)
