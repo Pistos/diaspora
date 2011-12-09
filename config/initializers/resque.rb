@@ -8,6 +8,8 @@ if !AppConfig.single_process_mode?
     Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   elsif AppConfig[:redis_url]
     uri = URI.parse(AppConfig[:redis_url])
+    # Backward compatibility is maintained for old configurations that put only a hostname in redis_url
+    # instead of a full URI.
     Resque.redis = Redis.new(:host => uri.host || AppConfig[:redis_url], :port => uri.port || 6379)
   end
 end

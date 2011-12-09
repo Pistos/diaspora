@@ -115,6 +115,7 @@ class RedisCache
     if AppConfig[:redis_cache_url]
       URI.parse(AppConfig[:redis_cache_url]).host
     elsif AppConfig[:redis_location]
+      # backward compatibility
       AppConfig[:redis_location]
     end
   end
@@ -123,6 +124,7 @@ class RedisCache
     if AppConfig[:redis_cache_url]
       URI.parse(AppConfig[:redis_cache_url]).port
     elsif AppConfig[:redis_port]
+      # backward compatibility
       AppConfig[:redis_port]
     end
   end
