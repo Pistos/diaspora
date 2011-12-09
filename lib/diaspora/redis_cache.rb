@@ -112,11 +112,19 @@ class RedisCache
   end
 
   def self.redis_host
-    (AppConfig[:redis_location].blank?) ? nil : AppConfig[:redis_location]
+    if AppConfig[:redis_cache_url]
+      URI.parse(AppConfig[:redis_cache_url]).host
+    elsif AppConfig[:redis_location]
+      AppConfig[:redis_location]
+    end
   end
 
   def self.redis_port
-    (AppConfig[:redis_port].blank?) ? nil : AppConfig[:redis_port]
+    if AppConfig[:redis_cache_url]
+      URI.parse(AppConfig[:redis_cache_url]).port
+    elsif AppConfig[:redis_port]
+      AppConfig[:redis_port]
+    end
   end
 
   # @return [String]
