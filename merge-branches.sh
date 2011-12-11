@@ -35,6 +35,11 @@ else
   version=$1
 fi
 
+if [ -z "$version" ]; then
+  echo "Please specify the first version as an argument.  e.g. ${0} 1.0.0"
+  exit 4
+fi
+
 version_branch="${version_root}-${version}"
 
 echo "** Building ${version_branch}"
@@ -56,5 +61,5 @@ grep -v '#' branches-to-merge.txt | while read branchname ; do
   echo "----- Merging: ${branchname}"
   git merge --rerere-autoupdate "${branchname}" \
     || ( git diff --quiet && git commit -m "Merge branch '${branchname}' into ${version_branch}" ) \
-    || ( echo && echo '*****************' && echo "Failed to merge ${branchname}; aborting." && exit 4 )
+    || ( echo && echo '*****************' && echo "Failed to merge ${branchname}; aborting." && exit 5 )
 done
