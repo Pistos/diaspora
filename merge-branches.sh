@@ -51,7 +51,7 @@ fi
 git checkout -b ${version_branch}
 
 # Merge all branches listed in branches-to-merge.txt
-cat branches-to-merge.txt | while read branchname ; do
+grep -v '#' branches-to-merge.txt | while read branchname ; do
   echo
   echo "----- Merging: ${branchname}"
   git merge --rerere-autoupdate "${branchname}" \
