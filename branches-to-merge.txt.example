@@ -1,0 +1,17 @@
+gemfile-pg-2
+postgresql-schema-rb
+diasp0ra.ca-homepage
+rename-stream
+text-tweaks
+post-preview-2011-10-27
+view-own-profile-button
+post-hint-in-notifications
+reshare-link-for-already-reshared-2011-11-06
+issue-2382-expand-shortened-urls
+issue-2224-shorten-bare-urls
+hide-comments-from-ignored
+hide-reshares-from-ignored
+diasp0ra.ca-user-notice-2
+less-jargon
+redis-config-refactor
+federation-subscription
