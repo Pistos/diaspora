@@ -19,6 +19,7 @@ vendor/bundle/*
 vendor/cache/*
 config/database.yml
 .rvmrc_custom
+branches-to-merge.txt
 
 #Mailing list stuff
 config/email_offset
