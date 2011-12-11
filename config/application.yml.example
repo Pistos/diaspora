@@ -59,6 +59,12 @@ defaults: &defaults
   # to contact joindiaspora.com, set this to true:
   no_follow_diasporahq: false
 
+  # pod_url of pods where public messages of this pod will also be sent.
+  # This helps increase inter-pod public engagement.  Aspect-limited messages
+  # are not affected by this setting.
+  public_federation_destinations:
+    # - 'https://joindiaspora.com/'
+
   # Community Spotlight
   # (expressed as an array of Diaspora IDs)
   community_spotlight:
@@ -127,7 +133,7 @@ defaults: &defaults
 
   # The path to the sendmail binary. Ignored if mailer_method is not set to sendmail
   sendmail_location: '/usr/sbin/sendmail'
-  
+
   # Set this to true if you want to use exim and sendmail
   sendmail_exim_fix: false
 
@@ -198,7 +204,7 @@ defaults: &defaults
   cloudfiles_images_container: 'Image Backup'
 
   # Donations
-  
+
   # Leave this blank to not show the request for donations
   # Use paypal for recurring donations
   paypal_hosted_button_id: ""
