@@ -581,6 +581,7 @@ ul.as-selections
     :align right
 
 ul.comments,
+ul.preview_comments,
 ul.show_comments,
 .likes_container,
 .stream_element .reshare
@@ -664,6 +665,9 @@ ul.show_comments
   :margin
     :top 6px
 
+.comment_form_indent
+  :left 35px
+
 form.new_comment
   :padding 8px 5px
   .avatar
@@ -675,6 +679,9 @@ form.new_comment
   :min-height 35px
 
   input
+    :display none
+
+  .comment-preview
     :display none
 
   :margin
@@ -703,7 +710,6 @@ form.new_comment
       :bottom 0
       :top -10px
     :position relative
-    :left 35px
 
   &.open
     .submit_button
@@ -714,6 +720,8 @@ form.new_comment
         :right 2px
 
     input
+      :display inline-block
+    #comm-preview
       :display inline-block
 
 
