@@ -218,49 +218,21 @@ describe PeopleController do
         @person = bob.person
       end
 
-      it "succeeds" do
+      it "redirects" do
         get :show, :id => @person.id
-        response.status.should == 200
+        response.status.should == 302
       end
 
-      it 'succeeds on the mobile site' do
+      it 'redirects on the mobile site' do
         get :show, :id => @person.id, :format => :mobile
-        response.should be_success
+        response.status.should == 302
       end
 
-      context 'with posts' do
-        before do
-          @public_posts = []
-          @public_posts << bob.post(:status_message, :text => "first public ", :to => bob.aspects[0].id, :public => true)
-          bob.post(:status_message, :text => "to an aspect @user is not in", :to => bob.aspects[1].id)
-          bob.post(:status_message, :text => "to all aspects", :to => 'all')
-          @public_posts << bob.post(:status_message, :text => "public", :to => 'all', :public => true)
-          @public_posts.first.created_at -= 1000
-          @public_posts.first.save
-        end
-
-        it "posts include reshares" do
-          reshare = @user.post(:reshare, :public => true, :root_guid => Factory(:status_message, :public => true).guid, :to => alice.aspects)
-          get :show, :id => @user.person.id
-          assigns[:stream].posts.map{|x| x.id}.should include(reshare.id)
-        end
-
-        it "assigns only public posts" do
-          get :show, :id => @person.id
-          assigns[:stream].posts.map(&:id).should =~ @public_posts.map(&:id)
-        end
-
-        it 'is sorted by created_at desc' do
-          get :show, :id => @person.id
-          assigns[:stream].stream_posts.should == @public_posts.sort_by{|p| p.created_at}.reverse
-        end
-      end
-
-      it 'throws 404 if the person is remote' do
+      it 'redirects if the person is remote' do
         p = Factory(:person)
 
         get :show, :id => p.id
-        response.status.should == 404
+        response.status.should == 302
       end
     end
 

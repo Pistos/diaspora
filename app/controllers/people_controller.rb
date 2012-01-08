@@ -5,7 +5,7 @@
 require File.join(Rails.root, "lib", 'stream', "person")
 
 class PeopleController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show]
+  before_filter :authenticate_user!
 
   respond_to :html, :except => [:tag_index]
   respond_to :json, :only => [:index, :show]
