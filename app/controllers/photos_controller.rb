@@ -3,7 +3,7 @@
 #   the COPYRIGHT file.
 
 class PhotosController < ApplicationController
-  before_filter :authenticate_user!, :except => :show
+  before_filter :authenticate_user!
 
   helper_method :parent, :photo, :additional_photos, :next_photo, :previous_photo, :ownership
 

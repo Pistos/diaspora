@@ -137,7 +137,7 @@ describe PhotosController do
         get :show, :id => @photo.to_param
         response.should redirect_to(aspects_path)
       end
-      
+
       it 'redirects to the sign in page if not logged in' do
         controller.stub(:user_signed_in?).and_return(false) #sign_out :user doesn't work
         get :show, :id => @photo.to_param
@@ -171,11 +171,11 @@ describe PhotosController do
         end
 
         it "succeeds" do
-          response.should be_success
+          response.status.should == 302
         end
 
-        it "assigns the photo" do
-          assigns[:photo].should == @photo
+        it "does not assign the photo" do
+          assigns[:photo].should be_nil
         end
       end
     end
