@@ -61,42 +61,10 @@ describe PostsController do
           @status = alice.post(:status_message, :text => "hello", :public => true, :to => 'all')
         end
 
-        it 'shows a public post' do
+        it 'redirects (to login)' do
           get :show, :id => @status.id
-          response.status.should == 200
+          response.status.should == 302
         end
-
-        it 'succeeds for statusnet' do
-          @request.env["HTTP_ACCEPT"] = "application/html+xml,text/html"
-          get :show, :id => @status.id
-          response.should be_success
-        end
-
-        it 'responds with diaspora xml if format is xml' do
-          get :show, :id => @status.guid, :format => :xml
-          response.body.should == @status.to_diaspora_xml
-        end
-
-        context 'with more than 3 comments' do
-          before do
-            (1..5).each do |i|
-              alice.comment  "comment #{i}", :post => @status
-            end
-          end
-
-          it 'shows all comments of a public post' do
-            get :show, :id => @status.id
-
-            response.body.should =~ /comment 3/
-            response.body.should_not =~ /comment 2/
-
-            get :show, :id => @status.id, 'all_comments' => '1'
-
-            response.body.should =~ /comment 3/
-            response.body.should =~ /comment 2/
-          end
-        end
-
       end
 
       it 'does not show a private post' do
