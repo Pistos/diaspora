@@ -53,19 +53,19 @@ describe TagsController do
     end
 
     context "not signed in" do
-      it 'assigns a Stream::Tag object with no user' do
+      it 'assigns no Stream::Tag object with no user' do
         get :show, :name => 'yes'
-        assigns[:stream].user.should be_nil
+        assigns[:stream].should be_nil
       end
 
-      it 'succeeds' do
+      it 'redirects' do
         get :show, :name => 'hellyes'
-        response.status.should == 200
+        response.status.should == 302
       end
 
-      it 'succeeds with mobile' do 
+      it 'redirects with mobile' do
         get :show, :name => 'foo', :format => :mobile
-        response.should be_success
+        response.status.should == 302
       end
     end
   end
