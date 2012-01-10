@@ -29,6 +29,12 @@ class ApplicationController < ActionController::Base
     request.env['HTTP_REFERER'] ||= '/aspects'
   end
 
+  def authenticate_user_if_public_restricted
+    if AppConfig['public_requires_logged_in']
+      authenticate_user!
+    end
+  end
+
   # we need to do this for vanna controller.  these should really be controller
   # helper methods instead
   def set_header_data

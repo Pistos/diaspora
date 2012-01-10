@@ -59,6 +59,11 @@ defaults: &defaults
   # to contact joindiaspora.com, set this to true:
   no_follow_diasporahq: false
 
+  # Set this to false if you want to expose public posts to the Internet
+  # (including search engines).  If true, then public posts will will only be
+  # visible to people logged in.
+  public_requires_logged_in: true
+
   # Community Spotlight
   # (expressed as an array of Diaspora IDs)
   community_spotlight:
@@ -127,7 +132,7 @@ defaults: &defaults
 
   # The path to the sendmail binary. Ignored if mailer_method is not set to sendmail
   sendmail_location: '/usr/sbin/sendmail'
-  
+
   # Set this to true if you want to use exim and sendmail
   sendmail_exim_fix: false
 
@@ -199,7 +204,7 @@ defaults: &defaults
   cloudfiles_images_container: 'Image Backup'
 
   # Donations
-  
+
   # Leave this blank to not show the request for donations
   # Use paypal for recurring donations
   paypal_hosted_button_id: ""

@@ -5,7 +5,7 @@ require File.join(Rails.root, 'app', 'models', 'acts_as_taggable_on', 'tag')
 require File.join(Rails.root, 'lib', 'stream', 'tag')
 
 class TagsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user_if_public_restricted
 
   skip_before_filter :which_action_and_user
   skip_before_filter :set_grammatical_gender
